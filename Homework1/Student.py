@@ -56,8 +56,7 @@ for i, eps in enumerate(epsilons):
         ax.axhline(y=0, color='r', linestyle='--', alpha=0.5)
 
 plt.tight_layout()
-# plt.show()
-# plt.close()
+
 
 # Part (a)(ii)
 print("=" * 60)
@@ -177,8 +176,6 @@ for row, eps in enumerate(eps_vals):
         ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-# plt.show()
-# plt.close()
 
 # Part (f)
 print("=" * 60)
@@ -256,4 +253,3 @@ for row, eps in enumerate(eps_vals):
 
 plt.tight_layout()
 plt.show()
-# plt.close()
