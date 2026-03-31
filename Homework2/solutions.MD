@@ -108,8 +108,6 @@ So even though softmax and OvR learn their weights differently, they both end up
 
 $$\sum_{k=1}^K p_k(x) = \sum_{k=1}^K \frac{\exp(w_k^\top x)}{\sum_{j=1}^K \exp(w_j^\top x)} = \frac{\sum_{k=1}^K \exp(w_k^\top x)}{\sum_{j=1}^K \exp(w_j^\top x)} = 1$$
 
-The softmax function is explicitly designed to normalise scores into a probability distribution.
-
 ### OvR Does Not Form a Valid Distribution
 
 Each OvR classifier outputs:
