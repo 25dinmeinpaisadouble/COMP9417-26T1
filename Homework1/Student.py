@@ -79,10 +79,6 @@ for i, eps in enumerate(epsilons):
         ax.set_ylabel("Frequency")
 
 plt.tight_layout()
-# plt.show()
-# plt.close()
-
-
 
 # Part (e)
 print("=" * 60)
