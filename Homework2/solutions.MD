@@ -196,24 +196,11 @@ plt.show()
 
 **Findings:**
 
-As $N_1$ shrinks from 500 to 5, the minority Class 1 becomes more and more underrepresented. The expected behavior:
+OvR collapses once Class 1 gets small. By $N_1 = 50$, it's classifying zero Class 1 points correctly. Softmax degrades too, but more gradually.
 
-1. **Softmax** maintains relatively stable recall for Class 1 even as it becomes a minority. This is because softmax jointly optimises all class boundaries and the normalisation makes sure all classes receive probability mass.
+Why? When $N_1 = 5$, OvR's Class 1 classifier sees 5 positives vs 1000 negatives. It just learns to say "not Class 1" for everything which is 99.5% accuracy on its training set. Softmax doesn't have this problem because it optimises all boundaries jointly and has to assign some probability to each class.
 
-2. **OvR** tends to struggle more with class imbalance. The binary classifier for Class 1 sees an increasingly imbalanced dataset (e.g., when $N_1 = 5$, it sees 5 positives vs 1000 negatives). This can cause the classifier to predict "not Class 1" for pretty much almost all points.
-
-**Geometrically:**
-
-The dataset has Class 1 centered at origin $(0,0)$, sandwiched between Class 0 at $(-3,0)$ and Class 2 at $(+3,0)$. The three clusters overlap due to Gaussian noise.
-
-- **Softmax** learns decision boundaries that carve out a region for each class. Since it normalises, it must give some probability to Class 1.
-
-- **OvR's** Class 1 classifier must be able to distinguish Class 1 from the combined Classes 0 and 2. When Class 1 is tiny, this classifier pretty much learns "everything is not Class 1" because that achieves high accuracy on the very strong imbalanced training set.
-
-
-Looking at fitted coefficients can confirm this. For OvR with extreme imbalance, the Class 1 classifier's intercept becomes very negative (predicting "not Class 1" by default), while Softmax's $w_1$ maintains a reasonable position relative to $w_0$ and $w_2$.
-
-
+The geometry makes it worse for OvR: Class 1 sits between Classes 0 and 2, so OvR has to separate it from points on both sides. You can see this in the fitted weights: OvR's Class 1 intercept drops to -5.32, basically defaulting to "not Class 1".
 
 ## Part (h)
 
